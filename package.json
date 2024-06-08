@@ -11,6 +11,9 @@
   "license": "ISC",
   "description": "This is a Todo list application.",
   "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.10.0"
