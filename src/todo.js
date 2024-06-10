@@ -44,12 +44,17 @@ class manageTodos {
 
         updateTodosOfLocalStorage(todoArray);
     };
+
+    editTodo(title, description, dueDate, priority, todoId) {
+        this.createTodos(title, description, dueDate, priority);
+        this.deleteTodo(todoId);
+    }
 };
 
 function generateTodoId() {
-    let todoId = storeTodoId();
+    let todoId = storeTodoIdInLocalStorage();
     todoId++;
-    updateTodoId(todoId);
+    updateTodoIdInLocalStorage(todoId);
     return todoId;
 }
 
@@ -57,6 +62,6 @@ const mgtTodo = new manageTodos;
 
 mgtTodo.updateTodoStatus(10);
 
-
+mgtTodo.editTodo('T', 'D', 'd', 'Low', 10);
 
 export { manageTodos };
