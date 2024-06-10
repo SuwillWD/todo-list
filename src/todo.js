@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodos,  storeTodoId, updateTodoId  } from './storage.js';
+import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage,  storeTodoIdInLocalStorage, updateTodoIdInLocalStorage  } from './storage.js';
 
 class todo {
 

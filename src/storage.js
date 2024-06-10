@@ -1,7 +1,3 @@
-function storageRecordExits() {
-    return localStorage["todoObjects"] ? 1 : null;
-}
-
 function storeTodoToLocalStorage (todoObject) {
     if (localStorage["todoObjects"]) {
         const tempTodoArray = retrieveTodosFromLocalStorage();
@@ -20,11 +16,11 @@ function retrieveTodosFromLocalStorage() {
     )];
 };
 
-function updateTodos(todoArray) {
+function updateTodosOfLocalStorage(todoArray) {
     localStorage["todoObjects"] = JSON.stringify(todoArray);
 }
 
-function storeTodoId () {
+function storeTodoIdInLocalStorage () {
     if (!localStorage["todoId"]) {
         localStorage["todoId"] = 0;
         return 0;
@@ -33,8 +29,8 @@ function storeTodoId () {
     }
 }
 
-function updateTodoId(todoId) {
+function updateTodoIdInLocalStorage(todoId) {
     localStorage["todoId"] = todoId;
 }
 
-export { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodos, storeTodoId, updateTodoId };
+export { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage, storeTodoIdInLocalStorage, updateTodoIdInLocalStorage };
