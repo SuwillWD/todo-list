@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage,  storeTodoIdInLocalStorage, updateTodoIdInLocalStorage  } from './storage.js';
+import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage,  storeTodoIdInLocalStorage, updateTodoIdInLocalStorage  } from './storage-project.js';
 
 class todo {
 
@@ -62,6 +62,5 @@ const mgtTodo = new manageTodos;
 
 mgtTodo.updateTodoStatus(10);
 
-mgtTodo.editTodo('T', 'D', 'd', 'Low', 10);
 
 export { manageTodos };
