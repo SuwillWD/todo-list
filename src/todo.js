@@ -30,8 +30,20 @@ class manageTodos {
             }
         }
 
-        updateTodos(todoArray);
-    }
+        updateTodosOfLocalStorage(todoArray);
+    };
+
+    updateTodoStatus(todoId) {
+        let todoArray = retrieveTodosFromLocalStorage();
+
+        for (let i = 0; i < todoArray.length; i++) {
+            if (todoArray[i].id === todoId) {
+                todoArray[i].isCompleted = true;
+            }
+        }
+
+        updateTodosOfLocalStorage(todoArray);
+    };
 };
 
 function generateTodoId() {
@@ -43,7 +55,7 @@ function generateTodoId() {
 
 const mgtTodo = new manageTodos;
 
-
+mgtTodo.updateTodoStatus(10);
 
 
 
