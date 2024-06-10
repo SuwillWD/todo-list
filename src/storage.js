@@ -20,6 +20,10 @@ function retrieveTodosFromLocalStorage() {
     )];
 };
 
+function updateTodos(todoArray) {
+    localStorage["todoObjects"] = JSON.stringify(todoArray);
+}
+
 function storeTodoId () {
     if (!localStorage["todoId"]) {
         localStorage["todoId"] = 0;
@@ -33,4 +37,4 @@ function updateTodoId(todoId) {
     localStorage["todoId"] = todoId;
 }
 
-export { storeTodoToLocalStorage, storeTodoId, updateTodoId };
+export { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodos, storeTodoId, updateTodoId };

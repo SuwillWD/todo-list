@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { storeTodoToLocalStorage, storeTodoId, updateTodoId  } from './storage.js';
+import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodos,  storeTodoId, updateTodoId  } from './storage.js';
 
 class todo {
 
@@ -21,7 +21,17 @@ class manageTodos {
         storeTodoToLocalStorage(todoObject);
     };
 
+    deleteTodo(todoId) {
+        let todoArray = retrieveTodosFromLocalStorage();
 
+        for (let i = 0; i < todoArray.length; i++) {
+            if (todoArray[i].id === todoId) {
+                todoArray.splice(i, 1);
+            }
+        }
+
+        updateTodos(todoArray);
+    }
 };
 
 function generateTodoId() {
@@ -32,7 +42,6 @@ function generateTodoId() {
 }
 
 const mgtTodo = new manageTodos;
-
 
 
 
