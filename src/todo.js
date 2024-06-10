@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
-import { storeTodoToLocalStorage } from './storage.js';
-
+import { storeTodoToLocalStorage, storeTodoId, updateTodoId  } from './storage.js';
 
 class todo {
 
     constructor (title, description, dueDate, priority) {
+        this.id = generateTodoId(),
         this.title = title,
         this.description = description,
         this.dueDate = dueDate,
@@ -20,10 +20,18 @@ class manageTodos {
         const todoObject = new todo(title, description, dueDate, priority);
         storeTodoToLocalStorage(todoObject);
     };
+
+
 };
 
-const mgtTodo = new manageTodos;
+function generateTodoId() {
+    let todoId = storeTodoId();
+    todoId++;
+    updateTodoId(todoId);
+    return todoId;
+}
 
+const mgtTodo = new manageTodos;
 
 
 

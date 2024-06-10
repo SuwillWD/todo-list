@@ -4,12 +4,10 @@ function storageRecordExits() {
 
 function storeTodoToLocalStorage (todoObject) {
     if (localStorage["todoObjects"]) {
-        console.log('Then Here');
         const tempTodoArray = retrieveTodosFromLocalStorage();
         tempTodoArray.push(todoObject);
         localStorage.setItem('todoObjects', JSON.stringify(tempTodoArray));        
     } else {
-        console.log('First here');
         localStorage.setItem('todoObjects', 
             JSON.stringify([todoObject])
         );
@@ -22,4 +20,17 @@ function retrieveTodosFromLocalStorage() {
     )];
 };
 
-export { storeTodoToLocalStorage };
+function storeTodoId () {
+    if (!localStorage["todoId"]) {
+        localStorage["todoId"] = 0;
+        return 0;
+    } else {
+        return localStorage["todoId"];
+    }
+}
+
+function updateTodoId(todoId) {
+    localStorage["todoId"] = todoId;
+}
+
+export { storeTodoToLocalStorage, storeTodoId, updateTodoId };
