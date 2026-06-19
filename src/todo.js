@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { storeTodo, getAllTodos, updateTodos,  storeTodoId, updateTodoId  } from './storage-todo.js';
+import { manageTodoStorage } from './storage.js';
 
 class todo {
 
@@ -15,11 +15,11 @@ class todo {
     };
 
     createTodos () {
-        storeTodo(this);
+        manageTodoStorage.storeTodo(this);
     };
 
     getTodo(todoId) {
-        let todoArray = getAllTodos();
+        let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -29,7 +29,7 @@ class todo {
     }
 
     deleteTodo(todoId) {
-        let todoArray = getAllTodos();
+        let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -37,11 +37,11 @@ class todo {
             }
         }
 
-        updateTodos(todoArray);
+        manageTodoStorage.updateTodos(todoArray);
     };
 
     updateTodoStatus(todoId) {
-        let todoArray = getAllTodos();
+        let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -49,12 +49,12 @@ class todo {
             }
         }
 
-        updateTodos(todoArray);
+        manageTodoStorage.updateTodos(todoArray);
     };
 
     updateTodo(todoId, title, description, dueDate, priority, notes, project) {
         
-        let todoArray = getAllTodos();
+        let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -67,7 +67,7 @@ class todo {
 
             }
         }
-        updateTodos(todoArray);
+        manageTodoStorage.updateTodos(todoArray);
     }
 };
 

@@ -2,7 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/todo.js',
+    entry: './src/project.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),

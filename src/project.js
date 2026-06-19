@@ -1,24 +1,19 @@
-import { storeProjectToLocalStorage, retrieveProjectsFromLocalStorage, updateProjectsOfLocalStorage,  storeProjectIdInLocalStorage, updateProjectIdInLocalStorage  } from './storage-project.js';
+import { manageProjectStorage } from './storage.js';
 
 class project {
 
     constructor (name) {
-        this.id = generateProjectId(),
+        this.id = generateUUID(),
         this.name = name,
         this.isCompleted = false
     };
 
-};
-
-class manageProjects {
-
     createProject (name) {
-        const projectObject = new project(name);
-        storeProjectToLocalStorage(projectObject);
+        manageProjectStorage.storeProject(this);
     };
 
-    deleteProject (projectId) {
-        let projectArray = retrieveProjectsFromLocalStorage();
+    deleteProject(projectId) {
+        let projectArray = manageProjectStorage.getAllProjects();
 
         for (let i = 0; i < projectArray.length; i++) {
             if (projectArray[i].id === projectId) {
@@ -26,11 +21,11 @@ class manageProjects {
             }
         }
 
-        updateProjectsOfLocalStorage(projectArray);
+        manageProjectStorage.updateProjects(projectArray);
     };
 
     updateProjectStatus(projectId) {
-        let projectArray = retrieveProjectsFromLocalStorage();
+        let projectArray = manageProjectStorage.getAllProjects();
 
         for (let i = 0; i < projectArray.length; i++) {
             if (projectArray[i].id === projectId) {
@@ -38,22 +33,23 @@ class manageProjects {
             }
         }
 
-        updateProjectsOfLocalStorage(projectArray);
+        manageProjectStorage.updateProjects(projectArray);
     };
 
-    editProject (name, projectId) {
-        this.createProject(name);
-        this.deleteProject(projectId);
+    updateProject(projectId, name) {
+        
+        let projectArray = manageProjectStorage.getAllProjects();
+
+        for (let i = 0; i < projectArray.length; i++) {
+            if (projectArray[i].id === projectId) {
+                projectArray[i].name = name
+            }
+        }
+        manageProjectStorage.updateProjects(projectArray);
     }
 };
 
-function generateProjectId() {
-    let projectId = storeProjectIdInLocalStorage();
-    projectId++;
-    updateProjectIdInLocalStorage(projectId);
-    return projectId;
-};
+// UUID : Universally Unique Identifier using crypto global object
+const generateUUID = () => (crypto.randomUUID());
 
-const mgtProject = new manageProjects;
-mgtProject.updateProjectStatus(4);
-export { manageProjects };
+export default project;
