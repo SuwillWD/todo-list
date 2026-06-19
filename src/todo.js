@@ -1,28 +1,35 @@
 import { format } from 'date-fns';
-import { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage,  storeTodoIdInLocalStorage, updateTodoIdInLocalStorage  } from './storage-project.js';
+import { storeTodo, getAllTodos, updateTodos,  storeTodoId, updateTodoId  } from './storage-todo.js';
 
 class todo {
 
-    constructor (title, description, dueDate, priority) {
-        this.id = generateTodoId(),
+    constructor (title, description, dueDate, priority, notes, project) {
+        this.id = generateUUID(),
         this.title = title,
         this.description = description,
         this.dueDate = dueDate,
         this.priority = priority,
-        this.isCompleted = false
+        this.isCompleted = false,
+        this.notes = notes,
+        this.project = project
     };
 
-};
-
-class manageTodos {
-
-    createTodos (title, description, dueDate, priority) {
-        const todoObject = new todo(title, description, dueDate, priority);
-        storeTodoToLocalStorage(todoObject);
+    createTodos () {
+        storeTodo(this);
     };
+
+    getTodo(todoId) {
+        let todoArray = getAllTodos();
+
+        for (let i = 0; i < todoArray.length; i++) {
+            if (todoArray[i].id === todoId) {
+                return todoArray[i];
+            }
+        }
+    }
 
     deleteTodo(todoId) {
-        let todoArray = retrieveTodosFromLocalStorage();
+        let todoArray = getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -30,11 +37,11 @@ class manageTodos {
             }
         }
 
-        updateTodosOfLocalStorage(todoArray);
+        updateTodos(todoArray);
     };
 
     updateTodoStatus(todoId) {
-        let todoArray = retrieveTodosFromLocalStorage();
+        let todoArray = getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
@@ -42,25 +49,29 @@ class manageTodos {
             }
         }
 
-        updateTodosOfLocalStorage(todoArray);
+        updateTodos(todoArray);
     };
 
-    editTodo(title, description, dueDate, priority, todoId) {
-        this.createTodos(title, description, dueDate, priority);
-        this.deleteTodo(todoId);
+    updateTodo(todoId, title, description, dueDate, priority, notes, project) {
+        
+        let todoArray = getAllTodos();
+
+        for (let i = 0; i < todoArray.length; i++) {
+            if (todoArray[i].id === todoId) {
+                todoArray[i].title = title,
+                todoArray[i].description = description,
+                todoArray[i].dueDate = dueDate,
+                todoArray[i].priority = priority,
+                todoArray[i].notes = notes,
+                todoArray[i].project = project
+
+            }
+        }
+        updateTodos(todoArray);
     }
 };
 
-function generateTodoId() {
-    let todoId = storeTodoIdInLocalStorage();
-    todoId++;
-    updateTodoIdInLocalStorage(todoId);
-    return todoId;
-}
+// UUID : Universally Unique Identifier using crypto global object
+const generateUUID = () => (crypto.randomUUID());
 
-const mgtTodo = new manageTodos;
-
-mgtTodo.updateTodoStatus(10);
-
-
-export { manageTodos };
+export default todo;

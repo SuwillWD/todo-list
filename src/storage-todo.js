@@ -1,6 +1,8 @@
-function storeTodoToLocalStorage (todoObject) {
+// Storage Implementation using localStorage
+
+const storeTodo = (todoObject) => {
     if (localStorage["todoObjects"]) {
-        const tempTodoArray = retrieveTodosFromLocalStorage();
+        const tempTodoArray = getAllTodos();
         tempTodoArray.push(todoObject);
         localStorage.setItem('todoObjects', JSON.stringify(tempTodoArray));        
     } else {
@@ -10,17 +12,13 @@ function storeTodoToLocalStorage (todoObject) {
     }
 };
 
-function retrieveTodosFromLocalStorage() {
-    return [...JSON.parse(
-        localStorage['todoObjects']
-    )];
-};
+const getAllTodos = () => ([...JSON.parse(localStorage['todoObjects'])]);
 
-function updateTodosOfLocalStorage(todoArray) {
+function updateTodos(todoArray) {
     localStorage["todoObjects"] = JSON.stringify(todoArray);
 }
 
-function storeTodoIdInLocalStorage () {
+function storeTodoId() {
     if (!localStorage["todoId"]) {
         localStorage["todoId"] = 0;
         return 0;
@@ -29,8 +27,8 @@ function storeTodoIdInLocalStorage () {
     }
 }
 
-function updateTodoIdInLocalStorage(todoId) {
+function updateTodoId(todoId) {
     localStorage["todoId"] = todoId;
 }
 
-export { storeTodoToLocalStorage, retrieveTodosFromLocalStorage, updateTodosOfLocalStorage, storeTodoIdInLocalStorage, updateTodoIdInLocalStorage };
+export { storeTodo, getAllTodos, updateTodos, storeTodoId, updateTodoId };
