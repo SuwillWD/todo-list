@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+PhagsPa&family=Playwrite+AU+VIC+Guides&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    padding: 3px 10px;
+    background-color: rgb(225, 225, 225);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+.side-bar {
+    background-color: rgba(15, 29, 65);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: rgb(190, 190, 190);
+}
+
+.project-head {
+    display: flex;
+    padding: 7px 10px;
+    gap: 5px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.project-head p {
+    flex: 1;
+}
+
+#project-toggle,
+#add-project {
+    background: none;
+    border: none;
+    color: rgb(190, 190, 190);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 12px;
+}
+
+#add-project:hover,
+#project-toggle:hover {
+    color: rgb(151, 151, 151);
+    cursor: pointer;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    padding-left: 0.5rem;
+}
+
+.projects button {
+    color: white;
+    border: none;
+    background: none;
+    text-decoration: none;
+    font-size: 11px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    height: 20%;
+}
+
+.seleted-project {
+    background-color: rgba(45, 64, 112) !important;
+    border-radius: 20px;
+}
+
+.projects button:hover {
+    color: rgb(208, 208, 208);
+    cursor: pointer;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-nav {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: space-between;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
+    align-items: center;
+    height: 10%;
+}
+
+.top-nav h1 {
+    font-size: 22px;
+}
+
+#add-todo {
+    background-color: rgba(0, 149, 255);
+    color: white;
+    font-size: 10px;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 20px;
+}
+
+#add-todo:hover {
+    background-color: rgb(0, 160, 255);
+    color: rgb(242, 242, 242);
+    cursor: pointer;
+}
+
+.right-icons button {
+    background: none;
+    border: none;
+    padding: 0 5px;
+    border-radius: 50%;
+    height: 20px;
+}
+
+.right-icons button:hover {
+    background-color: rgb(248, 248, 248);
+    cursor: pointer;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    flex: 1 1 auto;
+}
+
+footer div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(80, 80, 80);
+    color: white;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.bx-github {
+    color: white;
+}

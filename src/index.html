@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
     <title>Todo List</title>
 </head>
 <body>
-    
+    <header>
+        <div class="site-icon">Todoit</div>
+    </header>
+    <main>
+        <div class="side-bar">
+            <div class="project-head">
+               <button id="project-toggle"><i class="bx bx-chevron-down"></i></button> 
+               <p> Projects</p>
+               <button id="add-project"><i class="bx bx-plus"></i></button>
+            </div>
+            <div class="projects">
+                <button class="seleted-project">Default</button>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="top-nav">
+                <button id="add-todo"><i class="bx bx-plus"></i>Add new</button>
+                <h1 id="project-title">Default Project</h1>
+                <div class="right-icons">
+                    <button><i class="bx bx-bell"></i></button>
+                    <button><i class="bx bx-user"></i></button> 
+                </div>
+            </div>
+            <div class="todo-container">
+                <p>Nothing to show...</p>
+            </div>
+        </div>
+        
+    </main>
+    <footer>
+        <div>Copyright <i class="bx bx-copyright"></i>  SuwillWD <a href="https://github.com/SuwillWD/todo-list"><i class="bxl bx-github"></i></a></div>
+    </footer>
 </body>
 </html>
