@@ -23,7 +23,9 @@ header {
 main {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 5fr;
+    background-color: rgba(15, 29, 65, 0.86);
+    color: white;
 }
 
 .side-bar {
@@ -32,6 +34,7 @@ main {
     flex-direction: column;
     height: 100%;
     color: rgb(190, 190, 190);
+    border-right: 3px solid rgb(155 155 155 / 41%);
 }
 
 .project-head {
@@ -71,9 +74,11 @@ main {
     gap: 5px;
     align-items: flex-start;
     padding-left: 0.5rem;
+    padding-right: 5px;
 }
 
-.projects button {
+.projects button,
+.projects input {
     color: white;
     border: none;
     background: none;
@@ -81,9 +86,12 @@ main {
     font-size: 11px;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 5px 10px;
-    height: 20%;
+}
+
+.projects input {
+    margin-right: 3px;
 }
 
 .seleted-project {
@@ -94,6 +102,15 @@ main {
 .projects button:hover {
     color: rgb(208, 208, 208);
     cursor: pointer;
+}
+
+.projects button i {
+    display: none;
+}
+
+.projects button i:hover {
+    display: block;
+    color: white;
 }
 
 .main-container {
@@ -108,26 +125,53 @@ main {
     justify-content: space-between;
     box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
     align-items: center;
-    height: 10%;
+    height: 7%;
+    font-size: 14px;
+    border-bottom: 2px solid rgb(188, 188, 188);
 }
 
 .top-nav h1 {
-    font-size: 22px;
+    font-size: 15px;
 }
 
-#add-todo {
+#add-todo,
+#delete-project {
     background-color: rgba(0, 149, 255);
     color: white;
     font-size: 10px;
     border: none;
-    padding: 7px 15px;
+    padding: 3px 10px;
+    margin: 4px 0;
     border-radius: 20px;
 }
 
 #add-todo:hover {
     background-color: rgb(0, 160, 255);
-    color: rgb(242, 242, 242);
     cursor: pointer;
+}
+
+.right-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+select,
+option {
+  background: rgba(15, 29, 65, 0.618);
+  color: white;
+  border: none;
+  padding: 2px 5px;
+}
+
+#delete-project {
+    background-color: red;
+}
+
+
+#delete-project:hover {
+    background-color: rgb(255, 66, 66);
 }
 
 .right-icons button {
@@ -136,6 +180,12 @@ main {
     padding: 0 5px;
     border-radius: 50%;
     height: 20px;
+    color: white;
+}
+
+.right-icons label,
+.right-icons select {
+    font-size: 10px;
 }
 
 .right-icons button:hover {

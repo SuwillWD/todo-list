@@ -1,6 +1,6 @@
 import { manageProjectStorage } from './storage.js';
 
-class project {
+class Project {
 
     constructor (name) {
         this.id = generateUUID(),
@@ -12,7 +12,7 @@ class project {
         manageProjectStorage.storeProject(this);
     };
 
-    deleteProject(projectId) {
+    static deleteProject(projectId) {
         let projectArray = manageProjectStorage.getAllProjects();
 
         for (let i = 0; i < projectArray.length; i++) {
@@ -24,12 +24,28 @@ class project {
         manageProjectStorage.updateProjects(projectArray);
     };
 
-    updateProjectStatus(projectId) {
+    static getProject(projectId) {
         let projectArray = manageProjectStorage.getAllProjects();
 
         for (let i = 0; i < projectArray.length; i++) {
             if (projectArray[i].id === projectId) {
-                projectArray[i].isCompleted = true;
+                return projectArray[i];
+            }
+        }
+    }
+
+    static updateProjectStatus(projectId) {
+        let projectArray = manageProjectStorage.getAllProjects();
+
+        for (let i = 0; i < projectArray.length; i++) {
+            if (projectArray[i].id === projectId) {
+                if (projectArray[i].isCompleted === false) {
+                    projectArray[i].isCompleted = true;
+                } else {
+                    projectArray[i].isCompleted = false;
+                }
+                // projectArray[i].isCompleted === false ? true: false;
+                console.log(projectArray[i].isCompleted)
             }
         }
 
@@ -52,4 +68,4 @@ class project {
 // UUID : Universally Unique Identifier using crypto global object
 const generateUUID = () => (crypto.randomUUID());
 
-export default project;
+export default Project;

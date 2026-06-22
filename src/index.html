@@ -19,15 +19,21 @@
                <button id="add-project"><i class="bx bx-plus"></i></button>
             </div>
             <div class="projects">
-                <button class="seleted-project">Default</button>
             </div>
         </div>
 
         <div class="main-container">
             <div class="top-nav">
-                <button id="add-todo"><i class="bx bx-plus"></i>Add new</button>
+                <button id="add-todo"><i class="bx bx-plus"></i>Add new Todo</button>
                 <h1 id="project-title">Default Project</h1>
+                
                 <div class="right-icons">
+                    <label for="project-status">Status:</label>
+                    <select name="project-status" id="project-status">
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <button id="delete-project">Delete Project</button>
                     <button><i class="bx bx-bell"></i></button>
                     <button><i class="bx bx-user"></i></button> 
                 </div>
