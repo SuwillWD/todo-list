@@ -37,8 +37,9 @@ showAllProject();
 const createNewProject = (() => {
     const addProjectBtn = document.getElementById('add-project');
     const projectsDiv = document.querySelector('.projects');
-    const addProjectInput = document.createElement('input');
     let projectName = '';
+    const addProjectInput = document.createElement('input');
+    addProjectInput.place = 'Project Name';
 
     addProjectInput.addEventListener('keydown', (event) => {
         if (event.key == 'Enter') {
@@ -53,8 +54,8 @@ const createNewProject = (() => {
     })
 
     addProjectBtn.addEventListener('click', () => {
-
         projectsDiv.appendChild(addProjectInput);
+        addProjectInput.focus();
     })
 
 })();

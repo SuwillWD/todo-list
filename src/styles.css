@@ -92,6 +92,8 @@ main {
 
 .projects input {
     margin-right: 3px;
+    background-color: white;
+    color: black;
 }
 
 .seleted-project {
