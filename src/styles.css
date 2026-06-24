@@ -214,6 +214,10 @@ option {
     padding: 5px;
 }
 
+.todo-container div:first-child {
+    font-weight: bold;
+}
+
 .todo-wrapper {
     flex: 1;
     display: grid;

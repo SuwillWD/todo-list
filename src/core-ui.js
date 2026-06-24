@@ -101,8 +101,18 @@ function renderStoredTodos(todoContainer, currentProjectTodos) {
         todoWrapper.appendChild(todoTitle);
 
         const todoStatus = document.createElement('div');
-        todoStatus.textContent = currentProjectTodos[i].isCompleted;
+        todoStatus.textContent = currentProjectTodos[i].isCompleted ? 'Completed': 'In progress';
         todoWrapper.appendChild(todoStatus);
+
+        checkbox.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                Todo.updateTodoStatus(currentProjectTodos[i].id);
+                todoStatus.textContent = 'Completed';
+            } else {
+                Todo.updateTodoStatus(currentProjectTodos[i].id);
+                todoStatus.textContent = 'In progress';
+            }
+        })
 
         const todoPriority = document.createElement('div');
         todoPriority.textContent = currentProjectTodos[i].priority;

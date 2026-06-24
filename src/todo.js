@@ -40,12 +40,12 @@ class Todo {
         manageTodoStorage.updateTodos(todoArray);
     };
 
-    updateTodoStatus(todoId) {
+    static updateTodoStatus(todoId) {
         let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {
             if (todoArray[i].id === todoId) {
-                todoArray[i].isCompleted = true;
+                todoArray[i].isCompleted = todoArray[i].isCompleted === false ? true: false;
             }
         }
 
