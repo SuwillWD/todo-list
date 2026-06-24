@@ -1,0 +1,220 @@
+import Project from './project';
+import Todo from './todo';
+import { manageProjectStorage, manageTodoStorage } from './storage';
+
+// Renders when first time open the app & when the current project does't have any todos
+const renderTodos = () => {
+    let todoContainer = document.querySelector('.todo-container');
+    let todoArr = manageTodoStorage.getAllTodos(); 
+    let currentProjectId = getCurrentSelectedProjectId();
+    let currentProjectName = Project.getProject(currentProjectId).name;
+    let currentProjectTodos = [];
+
+    // Current project have any todos?
+    let haveTodos = false;
+
+    for (let i = 0; i < todoArr.length; i++) {
+        if (todoArr[i].project == currentProjectName) {
+            haveTodos = true;
+            currentProjectTodos.push(todoArr[i]);
+        }
+    }
+
+    while (todoContainer.children.length > 1) {
+        todoContainer.removeChild(todoContainer.lastElementChild);
+    }
+
+    if (haveTodos) {
+        renderStoredTodos(todoContainer, currentProjectTodos);
+    }
+};
+
+// On each reload
+const showAllProject = () => {
+    const projectsDiv = document.querySelector('.projects');
+    const storedProjects = manageProjectStorage.getAllProjects();
+    projectsDiv.textContent = '';
+
+    for (let i = 0; i < storedProjects.length; i++) {
+        const projectElement = document.createElement('button');
+        const deleteBtn = document.createElement('i');
+        projectElement.textContent = storedProjects[i].name;
+        projectElement.dataset.id = storedProjects[i].id;
+
+        if ( i == 0) {
+            projectElement.classList.add('seleted-project');
+        }
+
+        projectsDiv.appendChild(projectElement);
+    }
+
+    projectsDiv.addEventListener('click', (event) => {
+        if (event.target !== event.currentTarget) {
+            Array.from(projectsDiv.children).forEach(child => {
+                child.className = '';
+            });
+            event.target.classList.add('seleted-project');  
+            displayCurrentProject();
+        }
+    })
+};
+
+showAllProject();
+
+// Get currently selected project
+const getCurrentSelectedProjectId = () => {
+    const projectsDiv = document.querySelector('.projects');
+
+    const arr = Array.from(projectsDiv.children);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].className == 'seleted-project') {
+            return arr[i].dataset.id;
+        }
+    }
+
+}
+
+const showAddTodoBox = (() => {
+    const todoBox = document.getElementById('add-todo-box');
+    const addTodoBtn = document.getElementById('add-todo');
+
+    addTodoBtn.addEventListener('click', () => {
+        todoBox.showModal();
+    })
+})();
+
+function renderStoredTodos(todoContainer, currentProjectTodos) {
+    let currentProjectId = getCurrentSelectedProjectId();
+    for (let i = 0; i < currentProjectTodos.length; i++) {
+        const todoWrapper = document.createElement('div');
+        todoWrapper.classList.add('todo-wrapper');
+
+        const inputContainer = document.createElement('div');
+        const checkbox = document.createElement('input');
+        
+        checkbox.type = 'checkbox';
+        inputContainer.appendChild(checkbox);
+        todoWrapper.appendChild(inputContainer);
+
+        const todoTitle = document.createElement('div');
+        todoTitle.textContent = currentProjectTodos[i].title;
+        todoWrapper.appendChild(todoTitle);
+
+        const todoStatus = document.createElement('div');
+        todoStatus.textContent = currentProjectTodos[i].isCompleted;
+        todoWrapper.appendChild(todoStatus);
+
+        const todoPriority = document.createElement('div');
+        todoPriority.textContent = currentProjectTodos[i].priority;
+        todoWrapper.appendChild(todoPriority);
+
+        const todoDueDate = document.createElement('div');
+        todoDueDate.textContent = currentProjectTodos[i].dueDate;
+        todoWrapper.appendChild(todoDueDate);
+
+        const deleteTodo = document.createElement('div');
+        deleteTodo.innerHTML = '<i class="bx bx-trash" />';
+        todoWrapper.appendChild(deleteTodo);
+
+        todoContainer.appendChild(todoWrapper);
+    }
+
+};
+
+const createNewTodo = (() => {
+    const confirmBtn = document.getElementById('confirm');
+    const todoBox = document.getElementById('add-todo-box');
+
+    confirmBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let todoTitle = document.getElementById('title').value;
+        let todoDescription = document.getElementById('description').value;
+        let todoDueDate = String(document.getElementById('due-date').value);
+        let todoPriority = document.getElementById('priority').value;
+        let todoNotes = document.getElementById('notes').value;
+        let todoProject = Project.getProject(getCurrentSelectedProjectId()).name;
+
+        const newTodo = new Todo(todoTitle, todoDescription, todoDueDate, todoPriority, todoNotes, todoProject);
+        newTodo.createTodos();
+        displayCurrentProject();
+
+        todoBox.close();
+    })
+})();
+
+const createNewProject = (() => {
+    const addProjectBtn = document.getElementById('add-project');
+    const projectsDiv = document.querySelector('.projects');
+    let projectName = '';
+    const addProjectInput = document.createElement('input');
+    addProjectInput.place = 'Project Name';
+
+    addProjectInput.addEventListener('keydown', (event) => {
+        if (event.key == 'Enter') {
+            projectName = addProjectInput.value;
+            projectsDiv.lastElementChild.remove();
+
+            const project = new Project(projectName);
+            project.createProject();
+
+            showAllProject();
+        }
+    })
+
+    addProjectBtn.addEventListener('click', () => {
+        projectsDiv.appendChild(addProjectInput);
+        addProjectInput.focus();
+    })
+
+})();
+
+const updateProjectStatus = (() => {
+    const projectStatusSelect = document.querySelector('#project-status');
+
+    projectStatusSelect.addEventListener('change', (event) => {
+        let currentStatus = event.target.value;
+
+        let currentProjectId = getCurrentSelectedProjectId();
+        Project.updateProjectStatus(currentProjectId);
+
+    })
+})();
+
+function displayCurrentProject() {
+    const projectHeading = document.getElementById('project-title');
+    const currentProjectId = getCurrentSelectedProjectId();
+    const currentProjectTitle = Project.getProject(currentProjectId).name;
+
+    projectHeading.textContent = currentProjectTitle;
+    renderTodos();
+}
+
+const initialProjectStatus = (() => {
+    const projectStatusSelect = document.querySelector('#project-status');
+    const currentProjectId = getCurrentSelectedProjectId();
+    const currentSelectedProjectStatus = Project.getProject(currentProjectId).isCompleted;
+    
+
+    if (currentSelectedProjectStatus) {
+        projectStatusSelect.value = 'Completed';
+    } else {
+        projectStatusSelect.value = 'Ongoing';
+    }
+    displayCurrentProject();
+    
+})();
+
+const deleteProject = (() => {
+    const deleteProjectBtn = document.getElementById('delete-project');
+
+    deleteProjectBtn.addEventListener('click', () => {
+        const currentProjectId = getCurrentSelectedProjectId();
+        Project.deleteProject(currentProjectId);
+        showAllProject();
+        displayCurrentProject();
+    })
+})();
+
+
+export { getCurrentSelectedProjectId };

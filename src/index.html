@@ -39,7 +39,14 @@
                 </div>
             </div>
             <div class="todo-container">
-                <p>Nothing to show...</p>
+                 <div class="todo-wrapper">
+                    <div></div>
+                    <div>Active Tasks</div>
+                    <div>Status</div>
+                    <div>Priority</div>
+                    <div>Due Date</div>
+                    <div></div>
+                 </div>
             </div>
         </div>
         
@@ -47,5 +54,42 @@
     <footer>
         <div>Copyright <i class="bx bx-copyright"></i>  SuwillWD <a href="https://github.com/SuwillWD/todo-list"><i class="bxl bx-github"></i></a></div>
     </footer>
+
+    <dialog id="add-todo-box">
+        <form>
+            <div class="main-inputs">
+                <label for="title">
+                    Title:
+                    <input type="text" id="title" name="title" placeholder="Todo Title">
+                </label>
+                <label for="description">
+                    Description:
+                    <input type="text" id="description" name="description" placeholder="A small Description">
+                </label>
+                <label for="due-date">
+                    Due Date:
+                    <input type="date" id="due-date" name="due-date">
+                </label>
+                <label for="priority">
+                    Priority:
+                    <select id="priority" name="priority">
+                        <option selected>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                    </select>
+                </label>
+                <label for="notes">
+                    Notes:
+                    <Textarea id="notes" name="notes"></Textarea>
+                </label>
+            </div>
+            <div>
+            <div class="bottom-buttons">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirm" value="default">Confirm</button>
+            </div>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

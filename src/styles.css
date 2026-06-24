@@ -132,6 +132,15 @@ main {
     border-bottom: 2px solid rgb(188, 188, 188);
 }
 
+.main-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+form div.bottom-buttons {
+    display: flex;
+}
+
 .top-nav h1 {
     font-size: 15px;
 }
@@ -197,10 +206,34 @@ option {
 
 .todo-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+.todo-wrapper {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr 2fr 2fr 1fr;
+    max-height: 5%;
+    font-size: 10px;
+    text-align: center;
+}
+
+.todo-wrapper > * {
+    border: 2px solid rgb(155 155 155 / 41%);
+    border-top: none;
+}
+
+.todo-wrapper div:nth-child(1) {
+    border-left: none;
+}
+
+
+.todo-wrapper div:nth-last-child(1) {
+    border-right: none;
 }
 
 footer div {

@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { manageTodoStorage } from './storage.js';
 
-class todo {
+class Todo {
 
     constructor (title, description, dueDate, priority, notes, project) {
         this.id = generateUUID(),
@@ -74,4 +74,4 @@ class todo {
 // UUID : Universally Unique Identifier using crypto global object
 const generateUUID = () => (crypto.randomUUID());
 
-export default todo;
+export default Todo;
