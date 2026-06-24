@@ -83,6 +83,48 @@ const showAddTodoBox = (() => {
     })
 })();
 
+function showTodoDetails(title, description, dueDate, priority, status, notes, project) {
+    let showTodoDetailsBox = document.getElementById('todo-details');
+    let todoInfoDiv = document.querySelector('.todo-info');
+    let closeBtn = document.getElementById('close-btn');
+
+    todoInfoDiv.textContent = '';
+
+    let todoTitle = document.createElement('div');
+    todoTitle.textContent = title;
+    todoInfoDiv.appendChild(todoTitle);
+    
+    let todoDescription = document.createElement('div');
+    todoDescription.textContent = description;
+    todoInfoDiv.appendChild(todoDescription);
+
+    let todoDueDate = document.createElement('div');
+    todoDueDate.textContent = dueDate;
+    todoInfoDiv.appendChild(todoDueDate);
+
+    let todoPriority = document.createElement('div');
+    todoPriority.textContent = priority;
+    todoInfoDiv.appendChild(todoPriority);
+
+    let todoStatus = document.createElement('div');
+    todoStatus.textContent = status;
+    todoInfoDiv.appendChild(todoStatus);
+
+    let todoNotes = document.createElement('div');
+    todoNotes.textContent = notes;
+    todoInfoDiv.appendChild(todoNotes);
+    
+    let todoProject = document.createElement('div');
+    todoProject.textContent = project;
+    todoInfoDiv.appendChild(todoProject);
+
+    closeBtn.addEventListener('click', () => {
+        showTodoDetailsBox.close();
+    })
+
+    showTodoDetailsBox.showModal();
+}
+
 function renderStoredTodos(todoContainer, currentProjectTodos) {
     let currentProjectId = getCurrentSelectedProjectId();
     for (let i = 0; i < currentProjectTodos.length; i++) {
@@ -131,6 +173,9 @@ function renderStoredTodos(todoContainer, currentProjectTodos) {
             deleteCurrentTodo(currentProjectTodos[i].id);
         })
 
+        todoTitle.addEventListener('click', () => {
+            showTodoDetails(todoTitle.textContent, currentProjectTodos[i].description, todoDueDate.textContent, todoPriority.textContent, todoStatus.textContent, currentProjectTodos[i].notes, currentProjectTodos[i].project);
+        })
 
         todoContainer.appendChild(todoWrapper);
     }
@@ -140,6 +185,7 @@ function renderStoredTodos(todoContainer, currentProjectTodos) {
 const createNewTodo = (() => {
     const confirmBtn = document.getElementById('confirm');
     const todoBox = document.getElementById('add-todo-box');
+    const todoForm = document.querySelector('#add-todo-box form');
 
     confirmBtn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -155,6 +201,7 @@ const createNewTodo = (() => {
         newTodo.createTodos();
         displayCurrentProject();
 
+        todoForm.reset();
         todoBox.close();
     })
 })();

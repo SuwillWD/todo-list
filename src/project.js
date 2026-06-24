@@ -8,7 +8,7 @@ class Project {
         this.isCompleted = false
     };
 
-    createProject (name) {
+    createProject () {
         manageProjectStorage.storeProject(this);
     };
 

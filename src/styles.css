@@ -236,6 +236,10 @@ option {
     border-left: none;
 }
 
+.todo-wrapper div:nth-child(2) {
+    cursor: pointer;
+}
+
 
 .todo-wrapper div:nth-last-child(1) {
     border-right: none;
@@ -246,7 +250,7 @@ option {
     cursor: pointer;
 }
 
-#add-todo-box {
+#add-todo-box[open] {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -265,6 +269,70 @@ option {
     font-size: 12px;
     height: 100%;
     justify-content: space-between;
+}
+
+#todo-details[open] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border: none;
+    background-color: rgb(100, 184, 208);
+    width: 25vw;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    gap: 10px;
+} 
+
+.todo-heading {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.todo-labels,
+.todo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.todo-labels {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.todo-info {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.todo-buttons {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#close-btn,
+#edit-btn {
+    padding: 5px 10px;
+    background-color: green;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+}
+
+#close-btn:hover,
+#edit-btn:hover {
+    color: rgba(255, 255, 255, 0.427);
 }
 
 .main-inputs {
