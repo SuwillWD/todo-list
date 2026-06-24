@@ -51,24 +51,6 @@ class Todo {
 
         manageTodoStorage.updateTodos(todoArray);
     };
-
-    updateTodo(todoId, title, description, dueDate, priority, notes, project) {
-        
-        let todoArray = manageTodoStorage.getAllTodos();
-
-        for (let i = 0; i < todoArray.length; i++) {
-            if (todoArray[i].id === todoId) {
-                todoArray[i].title = title,
-                todoArray[i].description = description,
-                todoArray[i].dueDate = dueDate,
-                todoArray[i].priority = priority,
-                todoArray[i].notes = notes,
-                todoArray[i].project = project
-
-            }
-        }
-        manageTodoStorage.updateTodos(todoArray);
-    }
 };
 
 // UUID : Universally Unique Identifier using crypto global object
