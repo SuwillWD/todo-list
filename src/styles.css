@@ -235,6 +235,11 @@ option {
 
 .todo-wrapper div:nth-last-child(1) {
     border-right: none;
+    cursor: pointer;
+}
+
+.todo-wrapper div input {
+    cursor: pointer;
 }
 
 #add-todo-box {

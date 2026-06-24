@@ -28,7 +28,7 @@ class Todo {
         }
     }
 
-    deleteTodo(todoId) {
+    static deleteTodo(todoId) {
         let todoArray = manageTodoStorage.getAllTodos();
 
         for (let i = 0; i < todoArray.length; i++) {

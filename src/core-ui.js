@@ -113,8 +113,14 @@ function renderStoredTodos(todoContainer, currentProjectTodos) {
         todoWrapper.appendChild(todoDueDate);
 
         const deleteTodo = document.createElement('div');
+        deleteTodo.classList.add('todo-btn');
         deleteTodo.innerHTML = '<i class="bx bx-trash" />';
         todoWrapper.appendChild(deleteTodo);
+
+        deleteTodo.addEventListener('click', () => {
+            deleteCurrentTodo(currentProjectTodos[i].id);
+        })
+
 
         todoContainer.appendChild(todoWrapper);
     }
@@ -142,6 +148,13 @@ const createNewTodo = (() => {
         todoBox.close();
     })
 })();
+
+function deleteCurrentTodo(currentTodoId) {
+
+    Todo.deleteTodo(currentTodoId);
+
+    renderTodos();
+}
 
 const createNewProject = (() => {
     const addProjectBtn = document.getElementById('add-project');
