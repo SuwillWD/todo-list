@@ -14,7 +14,7 @@ const storeTodo = (todoObject) => {
 };
 
 const getAllTodos = () => {
-    if (localStorage['todoObject']) {
+    if (localStorage['todoObjects']) {
         return [...JSON.parse(localStorage['todoObjects'])];
     } else {
         return [];

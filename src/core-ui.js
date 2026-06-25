@@ -16,7 +16,12 @@ const renderTodos = () => {
     let todoContainer = document.querySelector('.todo-container');
     let todoArr = manageTodoStorage.getAllTodos(); 
     let currentProjectId = getCurrentSelectedProjectId();
-    let currentProjectName = Project.getProject(currentProjectId).name;
+    let currentProject = Project.getProject(currentProjectId);
+    let currentProjectName = '';
+
+    if (currentProject) {
+        currentProjectName = currentProject.name;
+    } 
     let currentProjectTodos = [];
 
     // Current project have any todos?
@@ -340,7 +345,14 @@ const updateProjectStatus = (() => {
 function displayCurrentProject() {
     const projectHeading = document.getElementById('project-title');
     const currentProjectId = getCurrentSelectedProjectId();
-    const currentProjectTitle = Project.getProject(currentProjectId).name;
+    const currentProject = Project.getProject(currentProjectId);
+    let currentProjectTitle = '';
+
+    if (!currentProject) {
+        currentProjectTitle = 'Create a project';
+    } else {
+        currentProjectTitle = currentProject.name;
+    }
 
     projectHeading.textContent = currentProjectTitle;
     renderTodos();
@@ -349,8 +361,14 @@ function displayCurrentProject() {
 const initialProjectStatus = (() => {
     const projectStatusSelect = document.querySelector('#project-status');
     const currentProjectId = getCurrentSelectedProjectId();
-    const currentSelectedProjectStatus = Project.getProject(currentProjectId).isCompleted;
-    
+    let currentProject = Project.getProject(currentProjectId);
+    let currentSelectedProjectStatus;
+
+    if (!currentProject) {
+        currentSelectedProjectStatus = false;
+    } else {
+        currentSelectedProjectStatus = currentProject.isCompleted;
+    }
 
     if (currentSelectedProjectStatus) {
         projectStatusSelect.value = 'Completed';
