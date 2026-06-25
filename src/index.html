@@ -24,7 +24,10 @@
 
         <div class="main-container">
             <div class="top-nav">
-                <button id="add-todo"><i class="bx bx-plus"></i>Add new Todo</button>
+                <div class="left-buttons">
+                    <button id="edit-project">Edit Project</button>
+                    <button id="add-todo"><i class="bx bx-plus"></i>Add new Todo</button>
+                </div>
                 <h1 id="project-title">Default Project</h1>
                 
                 <div class="right-icons">
@@ -109,6 +112,16 @@
             <button id="close-btn">Close</button>
             <button id="edit-btn">Edit</button>
         </div>
+    </dialog>
+
+    <dialog id="edit-project-details">
+        <form>
+            <h1 id="edit-heading">Edit Project</h1>
+            <label for="project-name">New Name</label>
+            <input type="text" id="project-name" placeholder="Project name">
+            <button id="edit-proj-cls">Close</button>
+            <button id="edit-proj-cnf">Confirm</button>
+        </form>
     </dialog>
 
 </body>

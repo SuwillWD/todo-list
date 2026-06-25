@@ -56,7 +56,7 @@ const showAllProject = () => {
             event.target.classList.add('seleted-project');  
             displayCurrentProject();
         }
-    })
+    });
 };
 
 showAllProject();
@@ -72,7 +72,46 @@ const getCurrentSelectedProjectId = () => {
         }
     }
 
-}
+};
+
+const editProjectDetails = (() => {
+    let editProjectBtn = document.getElementById('edit-project');
+    let editProjectBox = document.getElementById('edit-project-details');
+    let editProjectForm = document.querySelector('#edit-project-details form');
+
+    editProjectBtn.addEventListener('click', () => {
+        editProjectBox.showModal();
+    });
+
+    let closeBtn = document.getElementById('edit-proj-cls');
+    closeBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        editProjectForm.reset();
+        editProjectBox.close();
+    });
+
+    let editProjectCnf = document.getElementById('edit-proj-cnf');
+    editProjectCnf.addEventListener('click', (event) => {
+        let todoArr = manageTodoStorage.getAllTodos(); 
+        let projectId = getCurrentSelectedProjectId();
+        let currentProjectName = Project.getProject(projectId).name;
+        let newProjectName = document.getElementById('project-name').value;
+
+        for (let i = 0; i < todoArr.length; i++) {
+            if (todoArr[i].project == currentProjectName) {
+                todoArr[i].project = newProjectName;
+            }
+        }
+        manageTodoStorage.updateTodos(todoArr);
+
+        Project.updateProject(projectId, newProjectName);
+        event.preventDefault();
+        editProjectForm.reset();
+        showAllProject();
+        displayCurrentProject();
+        editProjectBox.close();
+    })
+})();
 
 const showAddTodoBox = (() => {
     const todoBox = document.getElementById('add-todo-box');

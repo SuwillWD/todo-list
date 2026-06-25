@@ -52,7 +52,7 @@ class Project {
         manageProjectStorage.updateProjects(projectArray);
     };
 
-    updateProject(projectId, name) {
+    static updateProject(projectId, name) {
         
         let projectArray = manageProjectStorage.getAllProjects();
 
