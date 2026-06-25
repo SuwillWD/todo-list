@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { manageTodoStorage } from './storage.js';
 
 class Todo {

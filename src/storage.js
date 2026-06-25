@@ -13,7 +13,13 @@ const storeTodo = (todoObject) => {
     }
 };
 
-const getAllTodos = () => ([...JSON.parse(localStorage['todoObjects'])]);
+const getAllTodos = () => {
+    if (localStorage['todoObject']) {
+        return [...JSON.parse(localStorage['todoObjects'])];
+    } else {
+        return [];
+    }
+};
 
 function updateTodos(todoArray) {
     localStorage["todoObjects"] = JSON.stringify(todoArray);

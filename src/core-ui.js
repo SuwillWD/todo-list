@@ -2,6 +2,15 @@ import Project from './project';
 import Todo from './todo';
 import { manageProjectStorage, manageTodoStorage } from './storage';
 
+// Creates a default project when user first time open app
+const renderDefaultView = (() => {
+    if (!localStorage['projectObjects']) {
+        let defaultProject = new Project('Default');
+        defaultProject.createProject();
+    }
+})();
+
+
 // Renders when first time open the app & when the current project does't have any todos
 const renderTodos = () => {
     let todoContainer = document.querySelector('.todo-container');
